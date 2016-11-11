@@ -18,6 +18,7 @@ namespace ServerChat
         public Form1()
         {
             InitializeComponent();
+            Server();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace ServerChat
         }
 
 
-       void Main(string[] args)
+       void Server()
         {
             // Устанавливаем для сокета локальную конечную точку
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
@@ -45,7 +46,7 @@ namespace ServerChat
                 // Начинаем слушать соединения
                 while (true)
                 {
-                    //Console.WriteLine("Ожидаем соединение через порт {0}", ipEndPoint);
+                    Console.WriteLine("Ожидаем соединение через порт {0}", ipEndPoint);
 
                     // Программа приостанавливается, ожидая входящее соединение
                     Socket handler = sListener.Accept();
@@ -60,7 +61,7 @@ namespace ServerChat
                     data += Encoding.UTF8.GetString(bytes, 0, bytesRec);
 
                     // Показываем данные на консоли
-                    // Console.Write("Полученный текст: " + data + "\n\n");
+                     Console.Write("Полученный текст: " + data + "\n\n");
                     InputText = data;
                     // string reply = "Ответ " + (data);
                     string reply = (data);
@@ -68,11 +69,11 @@ namespace ServerChat
                     byte[] msg = Encoding.UTF8.GetBytes(reply);
                     handler.Send(msg);
 
-                    //if (data.IndexOf("<TheEnd>") > -1)
-                    //{
-                    //    Console.WriteLine("Сервер завершил соединение с клиентом.");
-                    //    break;
-                    //}
+                    if (data.IndexOf("<TheEnd>") > -1)
+                    {
+                        Console.WriteLine("Сервер завершил соединение с клиентом.");
+                        break;
+                    }
 
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
@@ -82,10 +83,10 @@ namespace ServerChat
             {
                 Console.WriteLine(ex.ToString());
             }
-            //finally
-            //{
-            //    Console.ReadLine();
-            //}
+            finally
+            {
+                Console.ReadLine();
+            }
         }
 
 

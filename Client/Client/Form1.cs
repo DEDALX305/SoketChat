@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
+using System.Threading;
 
 namespace Client
 {
@@ -56,6 +57,7 @@ namespace Client
             {
                 InputText = textBox1.Text;
                 ok = true;
+                textBox3.Text = InputText;
             }
         }
 
@@ -87,23 +89,32 @@ namespace Client
 
       public  void Client1()
         {
-            try
-            {
+            //try
+            //{
 
                 SendMessageFromSocket(11000);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.ToString());
+            //}
             //finally
             //{
-            //    Console.ReadLine();
+            //   // Console.ReadLine();
             //}
         }
 
+        public void SendMessageFromSocket2()
+        {
 
-        void SendMessageFromSocket(int port)
+            Console.Write("Введите сообщение: ");
+            //string message = Console.ReadLine();
+            ok = false;
+            textBox2.Text = "Введите сообщение:";
+
+
+        }
+        public void SendMessageFromSocket(int port)
         {
             // Буфер для входящих данных
             byte[] bytes = new byte[1024];
@@ -120,34 +131,28 @@ namespace Client
             // Соединяем сокет с удаленной точкой
             sender.Connect(ipEndPoint);
 
-            Console.Write("Введите сообщение: ");
-            //string message = Console.ReadLine();
-            ok = false;
-            while (ok == false)
-            {
-                textBox2.Text = "текст";
-            }
-
-
-
-            string message = InputText;
+           
 
 
             Console.WriteLine("Сокет соединяется с {0} ", sender.RemoteEndPoint.ToString());
 
 
+
+
+            //// Получаем ответ от сервера
+            //int bytesRec = sender.Receive(bytes);
+            //string OtServera = Encoding.UTF8.GetString(bytes, 0, bytesRec);
+
+            //textBox2.Text = OtServera;
+            //Console.WriteLine("\nОтвет от сервера: {0}\n\n", Encoding.UTF8.GetString(bytes, 0, bytesRec));
+
+            SendMessageFromSocket2();
+
+
+            string message = InputText;
+            
             byte[] msg = Encoding.UTF8.GetBytes(message);
-
-            // Отправляем данные через сокет
             int bytesSent = sender.Send(msg);
-
-            // Получаем ответ от сервера
-            int bytesRec = sender.Receive(bytes);
-            string OtServera = Encoding.UTF8.GetString(bytes, 0, bytesRec);
-
-            textBox2.Text = OtServera;
-            Console.WriteLine("\nОтвет от сервера: {0}\n\n", Encoding.UTF8.GetString(bytes, 0, bytesRec));
-
             // Используем рекурсию для неоднократного вызова SendMessageFromSocket()
             if (message.IndexOf("<TheEnd>") == -1)
                 SendMessageFromSocket(port);
@@ -155,11 +160,18 @@ namespace Client
             // Освобождаем сокет
             sender.Shutdown(SocketShutdown.Both);
             sender.Close();
+
         }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //Client();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

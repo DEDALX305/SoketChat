@@ -48,7 +48,7 @@
             // 
             // listView2
             // 
-            this.listView2.Location = new System.Drawing.Point(111, 82);
+            this.listView2.Location = new System.Drawing.Point(12, 25);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(121, 97);
             this.listView2.TabIndex = 2;
@@ -57,7 +57,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(108, 53);
+            this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 13);
             this.label2.TabIndex = 3;
@@ -65,7 +65,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(82, 252);
+            this.button1.Location = new System.Drawing.Point(118, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 23);
             this.button1.TabIndex = 4;
@@ -74,7 +74,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(33, 209);
+            this.button2.Location = new System.Drawing.Point(12, 167);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(249, 125);
+            this.listView1.Location = new System.Drawing.Point(166, 25);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(121, 97);
             this.listView1.TabIndex = 7;
@@ -115,6 +115,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

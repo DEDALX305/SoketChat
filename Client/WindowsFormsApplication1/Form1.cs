@@ -36,10 +36,10 @@ namespace WindowsFormsApplication1
 
             client.Connect(host, port); //подключение клиента
             stream = client.GetStream(); // получаем поток
-            string userName;
-            userName = WindowsFormsApplication1.Form1.userName;
+            //string userName;
+            //userName = Form1.userName;
             string message = userName;
-            byte[] data = Encoding.Unicode.GetBytes(message);
+            byte[] data = Encoding.Unicode.GetBytes(message); // ссылка на строку не ссылается на экземпляр String
             stream.Write(data, 0, data.Length);
 
             // запускаем новый поток для получения данных
@@ -159,7 +159,8 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // MainP.Program Start = new MainP.Program();
+            // MainP.Program Start = new MainP.Program();
+            userName = textBox2.Text;
             main222();
         }
 
